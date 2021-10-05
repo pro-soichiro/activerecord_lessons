@@ -1,3 +1,4 @@
+require 'active_support/all'
 require 'active_record'
 require 'pp'
 
@@ -11,3 +12,15 @@ ActiveRecord::Base.establish_connection(
 
 class User < ActiveRecord::Base
 end
+
+# insert
+
+user = User.new
+user.name = "tanaka"
+user.age = 23
+user.save
+
+user = User.new(name: "hayashi",age: 25)
+user.save
+
+User.create(name: "hoshi",age: 22)
