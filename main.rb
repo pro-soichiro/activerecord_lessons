@@ -1,9 +1,12 @@
 require 'active_support/all'
 require 'active_record'
 require 'pp'
+require 'logger'
 
 Time.zone_default = Time.find_zone! 'Tokyo'
 ActiveRecord::Base.default_timezone = :local
+
+ActiveRecord::Base.logger = Logger.new(STDOUT)
 
 ActiveRecord::Base.establish_connection(
   "adapter" => "sqlite3",
@@ -15,12 +18,8 @@ end
 
 # insert
 
-user = User.new
-user.name = "tanaka"
-user.age = 23
+user = User.new do |u|
+  u.name = "mochizuki"
+  u.age = 18
+end
 user.save
-
-user = User.new(name: "hayashi",age: 25)
-user.save
-
-User.create(name: "hoshi",age: 22)
